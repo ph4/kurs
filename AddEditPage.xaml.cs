@@ -23,6 +23,8 @@ namespace kurs
         public AddEditPage()
         {
             InitializeComponent();
+            comboCategory.ItemsSource = Dns2Entities.GetContext().category.ToList();
         }
+
     }
 }

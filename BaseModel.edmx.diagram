@@ -5,25 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="85d9cbd2419e40e090b176c0e2fb6f67" Name="Diagram1">
-        <EntityTypeShape EntityType="dns2Model.address" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.cart" Width="1.5" PointX="7.625" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.cart_items" Width="1.5" PointX="3.5" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.category" Width="1.5" PointX="5.625" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.credentials" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.discount" Width="1.5" PointX="7.875" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.order" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.product" Width="1.5" PointX="3.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.sysdiagrams" Width="1.5" PointX="10.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dns2Model.user" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="dns2Model.FK__address__user_id__76619304" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__order__address_i__756D6ECB" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__cart_item__cart___719CDDE7" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__order__cart_id__74794A92" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__cart_item__produ__72910220" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__discount__catego__70A8B9AE" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__product__categor__6FB49575" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__user__credential__7755B73D" ManuallyRouted="false" />
-        <AssociationConnector Association="dns2Model.FK__order__user_id__73852659" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dns2Model.address" PointX="1.375" PointY="5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.cart" PointX="0.875" PointY="8.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.cart_items" PointX="3.125" PointY="8.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.category" PointX="7.5" PointY="9.375" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.credentials" PointX="9.25" PointY="5.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.discount" PointX="9.625" PointY="9.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.order" PointX="3.75" PointY="5.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.product" PointX="5.125" PointY="8.625" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.sysdiagrams" PointX="3.375" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dns2Model.user" PointX="6.875" PointY="5" Width="1.5" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__address__user_id__76619304" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__order__address_i__756D6ECB" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__cart_item__cart___719CDDE7" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__order__cart_id__74794A92" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__cart_item__produ__72910220" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__discount__catego__70A8B9AE" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__product__categor__6FB49575" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__user__credential__7755B73D" />
+        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__order__user_id__73852659" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
