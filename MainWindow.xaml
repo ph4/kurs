@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Azure">
+            <TextBlock x:Name="Header" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Header" VerticalAlignment="Center" FontSize="30"/>
+            <Button x:Name="BtnBack" Content="Back" Margin="10,18,652,17" FontSize="20" Click="BtnBack_Click"/>
+        </Grid>
+        <Frame Name="MainFrame" Content="Frame" Grid.Row="1" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"/>
+        <Grid Grid.Row="3" Background="SteelBlue"></Grid>
     </Grid>
 </Window>
