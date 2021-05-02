@@ -26,23 +26,46 @@ namespace kurs
             DGridModel.ItemsSource = Dns2Entities.GetContext().product.ToList();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new AddEditPage());
-        }
-
         private void BtnEdit_click(object sender, RoutedEventArgs e)
         {
+            var p = (sender as Button).DataContext as product;
+            Manager.MainFrame.Navigate(new AddEditPage(p));
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditPage());
+            Manager.MainFrame.Navigate(new AddEditPage(null));
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
+            var forRemove = DGridModel.SelectedItems.Cast<product>().ToList();
+            if ( MessageBox.Show($"Are you sure yo want to delete {forRemove.Count}", "Attention", 
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    var ctx = Dns2Entities.GetContext();
+                    ctx.product.RemoveRange(forRemove);
+                    ctx.SaveChanges();
+                    MessageBox.Show("Remove succes");
 
+                    DGridModel.ItemsSource = ctx.product.ToList();
+                } catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
+            }
+        }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Dns2Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                DGridModel.ItemsSource = Dns2Entities.GetContext().product.ToList();
+            }
         }
     }
 }

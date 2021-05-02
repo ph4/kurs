@@ -15,15 +15,6 @@ namespace kurs
     
     public partial class Dns2Entities : DbContext
     {
-        //Singleton stuff
-        private static Dns2Entities _context;
-
-        public static Dns2Entities GetContext()
-        {
-            if (_context == null) _context = new Dns2Entities();
-            return _context;
-        }
-
         public Dns2Entities()
             : base("name=Dns2Entities")
         {
