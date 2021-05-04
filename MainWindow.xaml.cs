@@ -28,6 +28,38 @@ namespace kurs
             Manager.MainFrame = MainFrame;
         }
 
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+        }
+
+        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            //UserControl usc = null;
+            //GridMain.Children.Clear();
+
+            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+            {
+                case "ItemHome":
+                    MainFrame.Navigate(new ProductsListViewPage());
+                    break;
+                case "ItemEdit":
+                    MainFrame.Navigate(new ProductsPage());
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.GoBack();
