@@ -23,7 +23,8 @@ namespace kurs
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new ProductsPage());
+            //MainFrame.Navigate(new ProductsPage());
+            MainFrame.Navigate(new ProductsListViewPage());
             Manager.MainFrame = MainFrame;
         }
 

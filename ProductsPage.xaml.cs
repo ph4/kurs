@@ -48,7 +48,7 @@ namespace kurs
                     var ctx = Dns2Entities.GetContext();
                     ctx.product.RemoveRange(forRemove);
                     ctx.SaveChanges();
-                    MessageBox.Show("Remove succes");
+                    MessageBox.Show("Remove success");
 
                     DGridModel.ItemsSource = ctx.product.ToList();
                 } catch (Exception ex)
