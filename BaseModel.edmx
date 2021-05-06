@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dns2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dns2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="address">
           <Key>
             <PropertyRef Name="id" />
@@ -44,7 +44,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="user_type" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -77,7 +77,7 @@
           <Property Name="description" Type="nvarchar" MaxLength="2000" />
           <Property Name="price" Type="money" />
           <Property Name="specifications_json" Type="nvarchar" MaxLength="1000" />
-          <Property Name="image" Type="varbinary" MaxLength="1" />
+          <Property Name="image" Type="varbinary" MaxLength="3000" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -98,7 +98,7 @@
           <Property Name="first_name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="middle_name" Type="nvarchar" MaxLength="100" />
           <Property Name="phone" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="dob" Type="date" />
           <Property Name="credentials" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__address__user_id__76619304">
@@ -259,8 +259,7 @@
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dns2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -311,10 +310,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="user_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="user" Relationship="Self.FK__user__credential__7755B73D" FromRole="credentials" ToRole="user" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="discount">
           <Key>
@@ -349,7 +348,7 @@
           <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="specifications_json" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="image" Type="Binary" MaxLength="1" FixedLength="false" />
+          <Property Name="image" Type="Binary" MaxLength="3000" FixedLength="false" />
           <NavigationProperty Name="cart_items" Relationship="Self.FK__cart_item__produ__72910220" FromRole="product" ToRole="cart_items" />
           <NavigationProperty Name="category" Relationship="Self.FK__product__categor__6FB49575" FromRole="product" ToRole="category" />
         </EntityType>
@@ -372,7 +371,7 @@
           <Property Name="first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="middle_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dob" Type="DateTime" Precision="0" />
           <Property Name="credentials" Type="Int32" Nullable="false" />
           <NavigationProperty Name="address" Relationship="Self.FK__address__user_id__76619304" FromRole="user" ToRole="address" />
           <NavigationProperty Name="credentials1" Relationship="Self.FK__user__credential__7755B73D" FromRole="user" ToRole="credentials" />
@@ -583,8 +582,8 @@
           <EntitySetMapping Name="credentials">
             <EntityTypeMapping TypeName="dns2Model.credentials">
               <MappingFragment StoreEntitySet="credentials">
+                <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="user_type" ColumnName="user_type" />
               </MappingFragment>

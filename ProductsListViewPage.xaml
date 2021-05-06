@@ -53,29 +53,31 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="20" Width="400">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="{Binding name}" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   Width="390" TextWrapping="Wrap" Margin="5 5" FontSize="26" FontWeight="Bold"/>
-                        <Image Width="400" Grid.Row="1" Stretch="UniformToFill"  HorizontalAlignment="Center" Margin="5">
-                            <Image.Source>
-                                <Binding Path ="image">
-                                    <Binding.TargetNullValue>
-                                        <ImageSource>Resources/no_image.png</ImageSource>
-                                    </Binding.TargetNullValue>
-                                </Binding>
-                            </Image.Source>
-                        </Image>
-                        <TextBlock Grid.Row="2" Text="{Binding price, StringFormat={}{0:N2} ₽}" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   Width="390" TextWrapping="Wrap" Margin="5 5" FontSize="20" />
-                        <TextBlock Grid.Row="3" Text="{Binding description}" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   Width="390" TextWrapping="Wrap" Margin="5 5"/>
-                    </Grid>
+                    <materialDesign:Card Width="300">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="250"/>
+                                <RowDefinition Height="70"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Width="300" Grid.Row="0" Stretch="UniformToFill"  HorizontalAlignment="Center">
+                                <Image.Source>
+                                    <Binding Path ="image">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>Resources/no_image.png</ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Grid.Row="1" Text="{Binding name}" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       TextWrapping="Wrap" Margin="5 0" Style="{DynamicResource MaterialDesignHeadline6TextBlock}"/>
+                            <TextBlock Grid.Row="2" Text="{Binding price, StringFormat={}{0:N2} ₽}" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       TextWrapping="Wrap" Margin="5 0" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                            <TextBlock Grid.Row="3" Text="{Binding description}" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                       TextWrapping="Wrap" Margin="10 20" Style="{DynamicResource MaterialDesignBody2TextBlock}"/>
+                        </Grid>
+                    </materialDesign:Card>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

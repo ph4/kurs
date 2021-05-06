@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="DGridModel" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="DGridModel" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource MaterialDesignDataGrid}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Desc" Binding="{Binding description}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Price" Binding="{Binding price}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cat" Binding="{Binding category}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cat" Binding="{Binding category.name}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Grid.Row="1" Click="BtnAdd_Click"></Button>

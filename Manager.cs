@@ -7,8 +7,15 @@ using System.Windows.Controls;
 
 namespace kurs
 {
-    class Manager
+    static class Manager
     {
         public static Frame MainFrame { get; set; }
+        public static user CurrentUser { get; set; } = null;
+        public delegate void UserChangeHandler(user user);
+        public static event UserChangeHandler UserChangeEvent;
+        public static void NotifyUserChange(user user)
+        {
+            UserChangeEvent?.Invoke(user);
+        }
     }
 }

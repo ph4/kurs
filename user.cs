@@ -26,7 +26,7 @@ namespace kurs
         public string first_name { get; set; }
         public string middle_name { get; set; }
         public string phone { get; set; }
-        public System.DateTime dob { get; set; }
+        public Nullable<System.DateTime> dob { get; set; }
         public int credentials { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

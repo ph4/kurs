@@ -21,9 +21,9 @@ namespace kurs
         }
     
         public int id { get; set; }
-        public string email { get; set; }
         public string password { get; set; }
         public string user_type { get; set; }
+        public string login { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<user> user { get; set; }
