@@ -23,7 +23,26 @@ namespace kurs
         public UserPage()
         {
             InitializeComponent();
+            if (Manager.CurrentUser == null)
+                ToLogin();
+            else OnUserChange(Manager.CurrentUser);
+        }
+
+        private void ToLogin()
+        {
+            MasterGrid.Children.Clear();
+            Manager.UserChangeEvent += new Manager.UserChangeHandler(OnUserChange);
             MasterGrid.Children.Add(new LoginControl());
+        }
+
+        void OnUserChange(user user)
+        {
+            MasterGrid.Children.Clear();
+            var tb = new TextBlock
+            {
+                Text = $"Logged in as {user.credentials1.login}\n FIO: {user.first_name} {user.last_name}\n PHONE {user.phone}"
+            };
+            MasterGrid.Children.Add(tb);
         }
     }
 }

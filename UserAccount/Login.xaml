@@ -13,9 +13,14 @@
              FontFamily="{materialDesign:MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
+
+    <UserControl.DataContext>
+        <local:LoginViewModel/>
+    </UserControl.DataContext>
+
     <Grid>
         <materialDesign:Card Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" >
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                         <Setter Property="Margin" Value="10"/>
@@ -32,23 +37,29 @@
                                              ></materialDesign:PackIcon>
                     <TextBlock Text="Sign in" Style="{DynamicResource MaterialDesignHeadline6TextBlock}" Margin="5 5"></TextBlock>
                 </StackPanel>
-                <TextBox x:Name="LoginInput" materialDesign:HintAssist.Hint="Email" Text="{Binding Login}">
+                <TextBox x:Name="LoginInput" materialDesign:HintAssist.Hint="Login"
+                         Text="{Binding UserData.Login, UpdateSourceTrigger=PropertyChanged}">
                 </TextBox>
                 <PasswordBox x:Name="PasswordInput"
+                             Tag="{Binding UserData.Password, ValidatesOnNotifyDataErrors=True}"
                              materialDesign:HintAssist.Hint="Password"
                              PasswordChanged="PasswordInput_PasswordChanged"
                              ></PasswordBox>
                 <StackPanel x:Name="RegistrationFields" Orientation="Vertical"
-                            Visibility="{Binding RegistrationVisibility}">
-                    <PasswordBox x:Name="PasswordConfirmInput" materialDesign:HintAssist.Hint="Confrim password" PasswordChanged="PasswordConfirmInput_PasswordChanged">
-                        
+                            Visibility="{Binding RegistrationVisibility}"
+                            >
+                    <PasswordBox x:Name="PasswordConfirmInput"
+                                 materialDesign:HintAssist.Hint="Confrim password"
+                                 Tag="{Binding UserData.PasswordConfirm, ValidatesOnNotifyDataErrors=True}"
+                                 PasswordChanged="PasswordConfirmInput_PasswordChanged">
                     </PasswordBox>
-                    <TextBox Text="{Binding Phone, NotifyOnSourceUpdated=True}"
+                    <TextBox Text="{Binding UserData.Phone, UpdateSourceTrigger=PropertyChanged}"
                              materialDesign:HintAssist.Hint="Phone"></TextBox>
-                    <TextBox Text="{Binding Fio, NotifyOnSourceUpdated=True}" materialDesign:HintAssist.Hint="FIO" ></TextBox>
-                    </StackPanel>
+                    <TextBox Text="{Binding UserData.Fio, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="FIO" ></TextBox>
+                </StackPanel>
                 <TextBlock x:Name="ErrorText" Text="{Binding ErrorText}" Visibility="{Binding ErrorTextVisibility}"
-                         Style="{DynamicResource MaterialDesignCaptionTextBlock}" Foreground="Salmon" Width="200" Margin="10 10"></TextBlock>
+                           TextWrapping="Wrap"
+                           Style="{DynamicResource MaterialDesignCaptionTextBlock}" Foreground="Salmon" Width="200" Margin="10 10"></TextBlock>
                 <Grid>
                     <Button Content="{Binding ChangeActionButtonContent}"
                             Style="{DynamicResource MaterialDesignFlatButton}"

@@ -10,7 +10,11 @@ namespace kurs
     {
         //Singleton stuff
         private static Dns2Entities _context;
-
+        
+        /// <summary>
+        /// Attempts to get existing or instantiates database context
+        /// </summary>
+        /// <returns>Database context</returns>
         public static Dns2Entities GetContext()
         {
             if (_context == null) _context = new Dns2Entities();

@@ -22,42 +22,31 @@ namespace kurs
     /// </summary>
     public partial class LoginControl : UserControl
     {
-        private const int PASSWORD_MIN = 8;
-        private LoginControlViewModel vm;
+        private LoginViewModel Vm => (LoginViewModel)DataContext;
 
         public LoginControl()
         {
             InitializeComponent();
-            vm = new LoginControlViewModel();
-            DataContext = vm;
         }
 
         private void BtnAction_Click(object sender, RoutedEventArgs e)
         {
-            vm.DoAction();
+            Vm.DoAction();
         }
 
         private void BtnChangeAction_Click(object sender, RoutedEventArgs e)
         {
-            vm.ChangeType();
+            Vm.ChangeType();
         }
 
         private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            var len = PasswordInput.Password.Length;
-            if (len != 0 && len < 8)
-            {
-                MaterialDesignThemes.Wpf.HintAssist.SetHelperText(PasswordInput, "Minimum length is 8 symbols");
-            } else
-            {
-                MaterialDesignThemes.Wpf.HintAssist.SetHelperText(PasswordInput, null);
-            }
-            vm.Password = ((PasswordBox)sender).Password;
+            Vm.UserData.Password = ((PasswordBox)sender).Password;
         }
 
         private void PasswordConfirmInput_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            vm.PasswordConfirm = ((PasswordBox)sender).Password;
+            Vm.UserData.PasswordConfirm = ((PasswordBox)sender).Password;
         }
     }
 }

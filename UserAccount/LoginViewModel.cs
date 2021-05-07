@@ -8,50 +8,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using kurs.Validation;
+using System.Data.Entity.Validation;
 
 namespace kurs
 {
-    class FioAttribue : ValidationAttribute
+
+    /// <summary>
+    /// Login/Registration ViewModel
+    /// </summary>
+    public class LoginViewModel : ViewModelBase
     {
-        public override bool IsValid(object value)
-        {
-            var str = value.ToString();
-            var fio = str.Trim().Split();
-            return (fio.Length == 2 || fio.Length == 3) && fio.All(s => s.All(char.IsLetter));
-        }
-    }
-
-    class RussianPhoneAttribute : ValidationAttribute
-    {
-        public override bool IsValid(object value)
-        {
-            var regex = new Regex(@"(\+7)|(8)?\d{10}");
-            return regex.IsMatch(value.ToString());
-        }
-    }
-
-    class LoginControlViewModel : ViewModelBase
-    {
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
-        public string Login { get; set; }
-
-        [Required]
-        [MinLength(8, ErrorMessage = "Password must me at least 8 chars")]
-        public string Password { get; set; }
-
-        [Required]
-        [Compare("Password", ErrorMessage = "Passwords dont match")]
-        public string PasswordConfirm { get; set; }
-
-        [Required]
-        [FioAttribue(ErrorMessage = "Invalid FIO")]
-        public string Fio { get; set; }
-
-
-        [Required]
-        [RussianPhone(ErrorMessage = "Invalid Phone")]
-        public string Phone { get; set; }
+        public UserData UserData{ get; } = new UserData();
 
         public string ErrorText { get; private set; }
         public Visibility ErrorTextVisibility => ErrorText != null ? Visibility.Visible : Visibility.Collapsed;
@@ -62,7 +29,7 @@ namespace kurs
         public string ActionButtonContent => Registration ? "Register" : "Login";
         public string ChangeActionButtonContent => Registration ? "Back to login" : "To Registration";
 
-        public LoginControlViewModel() : base()
+        public LoginViewModel() : base()
         {
             Registration = false;
         }
@@ -77,8 +44,8 @@ namespace kurs
         {
             var ctx = Dns2Entities.GetContext();
             ErrorText = null;
-            Validate();
-            var cred = ctx.credentials.FirstOrDefault(c => c.login.ToLower() == Login.ToLower());
+            UserData.ValidateModel();
+            var cred = ctx.credentials.FirstOrDefault(c => c.login.ToLower() == UserData.Login.ToLower());
             if (Registration)
             {
                 if (cred != null)
@@ -87,27 +54,46 @@ namespace kurs
                 }
                 else
                 {
-                    if (!this.HasErrors)
+                    if (!UserData.HasErrors)
                     {
                         //throw new NotImplementedException();
                         cred = new credentials
                         {
-                            password = Password.ToString(),
-                            login = Login,
+                            password = UserData.Password.ToString(),
+                            login = UserData.Login,
                             user_type = "user",
                         };
-                        var fio = Fio.Split(' ');
+                        var fio = UserData.Fio.Split(' ');
                         var middle_name = fio.Length == 3 ? fio[2] : null;
                         var user = new user
                         {
-                            phone = Phone,
+                            phone = UserData.Phone,
                             last_name = fio[0],
                             first_name = fio[1],
                             middle_name = middle_name,
                             dob = null,
                             credentials = cred.id,
                         };
-                        
+                        ctx.credentials.Add(cred);
+                        ctx.user.Add(user);
+                        try
+                        {
+                            ctx.SaveChanges();
+                            Manager.CurrentUser = user;
+                        } catch (DbEntityValidationException e)
+                        {
+                            ErrorText = e.EntityValidationErrors
+                                .SelectMany(r => r.ValidationErrors)
+                                .Aggregate(new StringBuilder(), (s, v) => s.AppendLine(v.ErrorMessage))
+                                .ToString();
+                        } catch (Exception e)
+                        {
+                            ErrorText = $"{e.GetType()}: \nFrom: {e.Source}\nMessage: {e.Message}";
+                        } finally
+                        {
+                            ctx.user.Local.Clear();
+                            ctx.credentials.Local.Clear();
+                        }
                     }
                     else
                     {
@@ -123,9 +109,9 @@ namespace kurs
                 }
                 else
                 {
-                    if (!GetErrorsString("Password").Any() && !GetErrorsString("Login").Any())
+                    if (!UserData.GetErrorsString("Password").Any() && !UserData.GetErrorsString("Login").Any())
                     {
-                        if (cred.password == Password.ToString())
+                        if (cred.password == UserData.Password.ToString())
                         {
                             var user = cred.user.FirstOrDefault();
                             if (user == null && cred.user_type == "admin")
@@ -134,12 +120,12 @@ namespace kurs
                                 {
                                     first_name = "SUPER",
                                     last_name = "ADMIN",
-                                    phone = "9997771122",
+                                    phone = "9997777777",
                                     credentials = cred.id,
+                                    credentials1 = cred,
                                 };
                             }
                             Manager.CurrentUser = user;
-                            Manager.NotifyUserChange(user);
                         }
                         else
                         {

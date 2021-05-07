@@ -10,10 +10,17 @@ namespace kurs
     static class Manager
     {
         public static Frame MainFrame { get; set; }
-        public static user CurrentUser { get; set; } = null;
+        static user _currentUser = null;
+        public static user CurrentUser {
+            get => _currentUser;
+            set {
+                _currentUser = value;
+                NotifyUserChange(value);
+            }
+        }
         public delegate void UserChangeHandler(user user);
         public static event UserChangeHandler UserChangeEvent;
-        public static void NotifyUserChange(user user)
+        private static void NotifyUserChange(user user)
         {
             UserChangeEvent?.Invoke(user);
         }
