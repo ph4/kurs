@@ -61,7 +61,9 @@ namespace kurs
                         };
                         var validationResult = attribute.GetValidationResult(propInfo.GetValue(this), validationCtx);
                         if (validationResult != null)
+                        {
                             errors.Add(validationResult.ErrorMessage);
+                        }
                     } else
                     {
                         if (!attribute.IsValid(propInfo.GetValue(this)))
@@ -77,9 +79,12 @@ namespace kurs
                     ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
                     return false;
                 }
-                if (_ValidationErrorsByProperty.Remove(propertyName))
+                else
                 {
-                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+                    if (_ValidationErrorsByProperty.Remove(propertyName))
+                    {
+                        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+                    }
                 }
             }
 
@@ -93,6 +98,11 @@ namespace kurs
                 return errors;
             }
             return Array.Empty<object>();
+        }
+
+        public IDictionary<string, List<object>> GetErrorsAll()
+        {
+            return _ValidationErrorsByProperty;
         }
 
         public List<string> GetErrorsString(string propertyName)

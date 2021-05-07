@@ -50,7 +50,7 @@
                             >
                     <PasswordBox x:Name="PasswordConfirmInput"
                                  materialDesign:HintAssist.Hint="Confrim password"
-                                 Tag="{Binding UserData.PasswordConfirm, ValidatesOnNotifyDataErrors=True}"
+                                 Tag="{Binding PasswordConfirm, ValidatesOnNotifyDataErrors=True}"
                                  PasswordChanged="PasswordConfirmInput_PasswordChanged">
                     </PasswordBox>
                     <TextBox Text="{Binding UserData.Phone, UpdateSourceTrigger=PropertyChanged}"

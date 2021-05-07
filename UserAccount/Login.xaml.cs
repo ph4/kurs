@@ -46,7 +46,7 @@ namespace kurs
 
         private void PasswordConfirmInput_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            Vm.UserData.PasswordConfirm = ((PasswordBox)sender).Password;
+            Vm.PasswordConfirm = ((PasswordBox)sender).Password;
         }
     }
 }

@@ -16,9 +16,9 @@ namespace kurs
     /// <summary>
     /// Login/Registration ViewModel
     /// </summary>
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : AnnotationValidationViewModel
     {
-        public UserData UserData{ get; } = new UserData();
+        public UserData UserData{ get; } = new UserData(Dns2Entities.GetContext());
 
         public string ErrorText { get; private set; }
         public Visibility ErrorTextVisibility => ErrorText != null ? Visibility.Visible : Visibility.Collapsed;
@@ -40,11 +40,16 @@ namespace kurs
             ErrorText = null;
         }
 
+
+        public string Password => UserData.Password;
+        [Required]
+        [Compare("Password", ErrorMessage = "Passwords dont match")]
+        public string PasswordConfirm { get; set; }
+
         public void DoAction()
         {
             var ctx = Dns2Entities.GetContext();
             ErrorText = null;
-            UserData.ValidateModel();
             var cred = ctx.credentials.FirstOrDefault(c => c.login.ToLower() == UserData.Login.ToLower());
             if (Registration)
             {
@@ -54,32 +59,15 @@ namespace kurs
                 }
                 else
                 {
-                    if (!UserData.HasErrors)
+                    UserData.UserType = UserTypes.User;
+                    ValidateModel();
+                    UserData.ValidateModel();
+                    if (!UserData.HasErrors && !HasErrors)
                     {
-                        //throw new NotImplementedException();
-                        cred = new credentials
-                        {
-                            password = UserData.Password.ToString(),
-                            login = UserData.Login,
-                            user_type = "user",
-                        };
-                        var fio = UserData.Fio.Split(' ');
-                        var middle_name = fio.Length == 3 ? fio[2] : null;
-                        var user = new user
-                        {
-                            phone = UserData.Phone,
-                            last_name = fio[0],
-                            first_name = fio[1],
-                            middle_name = middle_name,
-                            dob = null,
-                            credentials = cred.id,
-                        };
-                        ctx.credentials.Add(cred);
-                        ctx.user.Add(user);
                         try
                         {
-                            ctx.SaveChanges();
-                            Manager.CurrentUser = user;
+                            UserData.SaveToDb();
+                            Manager.CurrentUser = UserData;
                         } catch (DbEntityValidationException e)
                         {
                             ErrorText = e.EntityValidationErrors
@@ -98,6 +86,11 @@ namespace kurs
                     else
                     {
                         ErrorText = "Check fields";
+                        //var errors = UserData.GetErrorsAll()
+                        //    .SelectMany( kv => kv.Value.Select(v => kv.Key + " : " + v))
+                        //    .Aggregate(new StringBuilder(), (sb, s) => sb.AppendLine(s))
+                        //    .ToString();
+                        //ErrorText = errors;
                     }
                 }
             }
@@ -124,8 +117,11 @@ namespace kurs
                                     credentials = cred.id,
                                     credentials1 = cred,
                                 };
+                                Manager.CurrentUser = new UserData(user);
+                            } else
+                            {
+                                Manager.CurrentUser = new UserData(ctx, user);
                             }
-                            Manager.CurrentUser = user;
                         }
                         else
                         {

@@ -35,12 +35,12 @@ namespace kurs
             MasterGrid.Children.Add(new LoginControl());
         }
 
-        void OnUserChange(user user)
+        void OnUserChange(UserData user)
         {
             MasterGrid.Children.Clear();
             var tb = new TextBlock
             {
-                Text = $"Logged in as {user.credentials1.login}\n FIO: {user.first_name} {user.last_name}\n PHONE {user.phone}"
+                Text = $"Logged in as {user.Login}\n FIO: {user.Fio}\n PHONE: {user.Phone}"
             };
             MasterGrid.Children.Add(tb);
         }
