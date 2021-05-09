@@ -45,7 +45,10 @@
                 <ComboBox Name="ComboCategory" Width="150" SelectionChanged="ComboCategory_SelectionChanged" DisplayMemberPath="name"></ComboBox>
             </StackPanel>
         </WrapPanel>
-        <ListView Grid.Row="1" Name="LViewProducts" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center">
+        <ListView Grid.Row="1" Name="LViewProducts"
+                  SelectionChanged="LViewProducts_SelectionChanged"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Center">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
@@ -53,7 +56,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card Width="300">
+                    <materialDesign:Card ButtonBase.Click="Card_Click" Width="250">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="250"/>
@@ -61,7 +64,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <Image Width="300" Grid.Row="0" Stretch="UniformToFill"  HorizontalAlignment="Center">
+                            <Image Width="250" Grid.Row="0" Stretch="UniformToFill"  HorizontalAlignment="Center">
                                 <Image.Source>
                                     <Binding Path ="image">
                                         <Binding.TargetNullValue>

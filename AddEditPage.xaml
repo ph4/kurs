@@ -22,10 +22,10 @@
             </Style>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="30,0,30,0"/>
+                <Setter Property="Margin" Value="20 0"/>
             </Style>
             <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
-                <Setter Property="Margin" Value="30,0,30,0"/>
+                <Setter Property="Margin" Value="20 0"/>
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
@@ -36,8 +36,9 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Cat" Grid.Row="0"></TextBlock>
         <ComboBox materialDesign:HintAssist.Hint="Select category" SelectedItem="{Binding category}" x:Name="comboCategory" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="Auto" DisplayMemberPath="name"/>
@@ -49,9 +50,25 @@
         <TextBox materialDesign:HintAssist.Hint="Price" Text="{Binding price}" Grid.Row="2" Grid.Column="1"></TextBox>
 
         <TextBlock Text="Desc" Grid.Row="3"></TextBlock>
-        <TextBox materialDesign:HintAssist.Hint="Description" Text="{Binding description}" Grid.Row="3" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 Text="{Binding description}"
+                 Height="Auto"
+                 AcceptsReturn="True" AcceptsTab="True"
+                 materialDesign:HintAssist.Hint="Description" 
+                 ></TextBox>
 
-        <Button x:Name="btnSave" Content="Save" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="4" VerticalAlignment="Center" Width="200" Height="40" Click="BtnSave_Click"/>
+        <Separator Style="{DynamicResource MaterialDesignDarkSeparator}"/>
+        <Separator/>
+        <TextBlock Grid.Row="4" Text="Json"></TextBlock>
+        <TextBox Grid.Row="4" Grid.Column="1" 
+                 Text="{Binding specifications_json}"
+                 FontFamily="Consolas"
+                 Height="Auto"
+                 AcceptsReturn="True" AcceptsTab="True"
+                 materialDesign:HintAssist.Hint="Json"
+                 ></TextBox>
+
+        <Button x:Name="btnSave" Grid.Row="5" Content="Save" Grid.Column="1" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="200" Height="40" Click="BtnSave_Click"/>
 
     </Grid>
 </Page>

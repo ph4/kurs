@@ -61,5 +61,16 @@ namespace kurs
         {
             UpdateProducts();
         }
+
+        private void Card_Click(object sender, RoutedEventArgs e)
+        {
+            var card = (MaterialDesignThemes.Wpf.Card)sender;
+        }
+
+        private void LViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var product = (product)LViewProducts.SelectedItem;
+            Manager.MainFrame.Navigate(new ProductStuff.ProductPage(product));
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace kurs
                     MainFrame.Navigate(new ProductsListViewPage());
                     break;
                 case "ItemEdit":
-                    MainFrame.Navigate(new ProductsPage());
+                    MainFrame.Navigate(new ProductsGridPage());
                     break;
                 case "ItemUser":
                     MainFrame.Navigate(new UserPage());

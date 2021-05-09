@@ -18,9 +18,9 @@ namespace kurs
     /// <summary>
     /// Interaction logic for ProductsPage.xaml
     /// </summary>
-    public partial class ProductsPage : Page
+    public partial class ProductsGridPage : Page
     {
-        public ProductsPage()
+        public ProductsGridPage()
         {
             InitializeComponent();
             DGridModel.ItemsSource = Dns2Entities.GetContext().product.ToList();
