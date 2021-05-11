@@ -47,6 +47,7 @@ namespace kurs
 
         public bool IsNewUser => _dbUser.id == 0;
         public bool CanSave => _dbUser != null;
+        public user DbUser => _dbUser;
         
         public UserData() {
             _credentials = new credentials
@@ -153,7 +154,28 @@ namespace kurs
                 OnPropertyChanged();
             }
         }
+
+        public ICollection<address> Addresses => DbUser.address;
+
+        public order CurrentOrderGetOrCreate() {
+            if (Addresses.Any())
+            {
+            }
+            var ord = DbUser.order.FirstOrDefault(o => o.Status == order.OrderStatus.Checkout);
+            if (ord is null)
+            {
+                ord = new order
+                {
+                    Status = order.OrderStatus.Checkout,
+                    user = DbUser,
+                    cart = new cart(),
+                };
+                DbUser.order.Add(ord);
+            }
+            return ord;
+        }
     }
+
     class PasswordConfirmUserData : UserData
     {
     }

@@ -70,6 +70,7 @@ namespace kurs
         private void LViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var product = (product)LViewProducts.SelectedItem;
+            LViewProducts.SelectedItem = null;
             Manager.MainFrame.Navigate(new ProductStuff.ProductPage(product));
         }
     }

@@ -95,6 +95,9 @@
     <Compile Include="cart.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CartPage.xaml.cs">
+      <DependentUpon>CartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="cart_items.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -107,6 +110,7 @@
     <Compile Include="discount.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderExtensions.cs" />
     <Compile Include="ProductJsonExtentions.cs" />
     <Compile Include="ProductPage\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
@@ -138,6 +142,10 @@
     <Compile Include="Validation\Validations.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
     <Page Include="AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

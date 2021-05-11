@@ -54,6 +54,9 @@ namespace kurs
                 case "ItemEdit":
                     MainFrame.Navigate(new ProductsGridPage());
                     break;
+                case "ItemCart":
+                    MainFrame.Navigate(new CartPage());
+                    break;
                 case "ItemUser":
                     MainFrame.Navigate(new UserPage());
                     break;

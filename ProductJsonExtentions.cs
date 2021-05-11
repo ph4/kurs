@@ -78,7 +78,9 @@ namespace kurs
         public override string ToString() => ValueWithUnit;
     }
 
-    partial class product
+#pragma warning disable IDE1006 // Naming Styles
+    public partial class product
+#pragma warning restore IDE1006 // Naming Styles
     {
         private JsonConverter jsonConverter = new JsonSpecificationConverter();
         public IList<ISpecification> Specifications =>

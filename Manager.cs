@@ -18,6 +18,7 @@ namespace kurs
                 NotifyUserChange(value);
             }
         }
+                
         public delegate void UserChangeHandler(UserData user);
         public static event UserChangeHandler UserChangeEvent;
         private static void NotifyUserChange(UserData user)

@@ -13,23 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace kurs.ProductStuff
+namespace kurs
 {
     /// <summary>
-    /// Interaction logic for ProductPage.xaml
+    /// Interaction logic for CartPage.xaml
     /// </summary>
-    public partial class ProductPage : Page
+    public partial class CartPage : Page
     {
-        public ProductPage(product p)
+        public CartPage()
         {
             InitializeComponent();
-            ((ProductPageViewModel)DataContext).Product = p;
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Disable selection
-            ((ListView)sender).SelectedItem = null;
+            var user = Manager.CurrentUser;
+            var items = user.CurrentOrderGetOrCreate().cart.cart_items;
+            CartLV.ItemsSource = items;
         }
     }
 }
