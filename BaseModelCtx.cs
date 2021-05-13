@@ -18,15 +18,18 @@ namespace kurs
         /// <returns>Database context</returns>
         public static Dns2Entities GetContext()
         {
-            if (_context == null) _context = new Dns2Entities();
-            try
+            if (_context == null)
             {
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString(), "Error initializing, no db connection?");
-                return null;
+                _context = new Dns2Entities();
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString(), "Error initializing, no db connection?");
+                    return null;
+                }
             }
             return _context;
         }

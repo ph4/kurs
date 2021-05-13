@@ -121,6 +121,7 @@ namespace kurs
                             } else
                             {
                                 Manager.CurrentUser = new UserData(ctx, user);
+                                ctx.SaveChanges();
                             }
                         }
                         else

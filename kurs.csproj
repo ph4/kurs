@@ -92,10 +92,11 @@
     </Compile>
     <Compile Include="BaseModelCtx.cs" />
     <Compile Include="Base\AnnotationValidationViewModel.cs" />
+    <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="cart.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CartPage.xaml.cs">
+    <Compile Include="CartPage\CartPage.xaml.cs">
       <DependentUpon>CartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="cart_items.cs">
@@ -110,30 +111,32 @@
     <Compile Include="discount.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelPartial\CartItemPartial.cs" />
+    <Compile Include="ModelPartial\CartPartial.cs" />
+    <Compile Include="order.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrderExtensions.cs" />
-    <Compile Include="ProductJsonExtentions.cs" />
+    <Compile Include="product.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPartial\ProductJsonExtentions.cs" />
     <Compile Include="ProductPage\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProductPage\ProductPageViewModel.cs" />
-    <Compile Include="UserAccount\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserAccount\LoginViewModel.cs" />
-    <Compile Include="order.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductsListViewPage.xaml.cs">
-      <DependentUpon>ProductsListViewPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="user.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccount\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccount\LoginViewModel.cs" />
+    <Compile Include="ProductsListViewPage.xaml.cs">
+      <DependentUpon>ProductsListViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserAccount\UserData.cs" />
     <Compile Include="UserAccount\UserPage.xaml.cs">
@@ -145,7 +148,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CartPage.xaml">
+    <Page Include="CartPage\CartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -63,7 +63,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="cart_id" Type="int" Nullable="false" />
-          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="address_id" Type="int" />
           <Property Name="payment_type" Type="nchar" MaxLength="1" />
           <Property Name="order_status" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -152,7 +152,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__order__address_i__756D6ECB">
-          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="address" Type="Self.address" Multiplicity="0..1" />
           <End Role="order" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="address">
@@ -331,7 +331,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="cart_id" Type="Int32" Nullable="false" />
-          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="address_id" Type="Int32" />
           <Property Name="payment_type" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="order_status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="address" Relationship="Self.FK__order__address_i__756D6ECB" FromRole="order" ToRole="address" />
@@ -392,7 +392,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__order__address_i__756D6ECB">
-          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="address" Type="Self.address" Multiplicity="0..1" />
           <End Role="order" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="address">

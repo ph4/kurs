@@ -72,8 +72,8 @@ namespace kurs
             _dbCtx = ctx;
         }
 
-        public UserData(Dns2Entities ctx, user dbUser) {
-            _dbUser = dbUser;
+        public UserData(Dns2Entities ctx, user dbUser) : this(dbUser)
+        {
             _dbCtx = ctx;
         }
 
@@ -171,6 +171,7 @@ namespace kurs
                     cart = new cart(),
                 };
                 DbUser.order.Add(ord);
+                Manager.SaveOrShowErrorMessage();
             }
             return ord;
         }

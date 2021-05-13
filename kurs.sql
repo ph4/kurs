@@ -130,6 +130,10 @@ CREATE TABLE [order] (
 )
 GO
 
+ALTER TABLE [order]
+ADD CONSTRAINT address_null_only_on_chekcout CHECK (NOT (address_id is null AND order_status != 'checkout'));
+GO
+
 CREATE TABLE [address] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [user_id] int NOT NULL,

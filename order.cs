@@ -17,7 +17,7 @@ namespace kurs
         public int id { get; set; }
         public int user_id { get; set; }
         public int cart_id { get; set; }
-        public int address_id { get; set; }
+        public Nullable<int> address_id { get; set; }
         public string payment_type { get; set; }
         public string order_status { get; set; }
     

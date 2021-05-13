@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace kurs
@@ -24,6 +25,33 @@ namespace kurs
         private static void NotifyUserChange(UserData user)
         {
             UserChangeEvent?.Invoke(user);
+        }
+
+        public static bool TrySaveOrShowErrorMessage()
+        {
+            try
+            {
+                Dns2Entities.GetContext().SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error saving changes to db", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        public static void SaveOrShowErrorMessage()
+        {
+            try
+            {
+                Dns2Entities.GetContext().SaveChanges();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error saving changes to db", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw e;
+            }
         }
     }
 }
