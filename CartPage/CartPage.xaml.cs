@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace kurs
 {
@@ -22,15 +23,19 @@ namespace kurs
     public partial class CartPage : Page
     {
         public cart Cart { get; }
-        public ObservableCollection<cart_items> Items => Cart.cart_items;
+        public address SelectedAddress { get; set; }
+
+        //Enumerable.Append availale in .net versions 4.7.1 and above
+        public IEnumerable<address> Addresses => Cart?.order1.user.address.Concat(new List<address>(1) { new address { address1 = "*New Address*" } });
         public CartPage()
         {
-            InitializeComponent();
             var user = Manager.CurrentUser;
-            Cart = user?.CurrentOrderGetOrCreate()?.cart;
-            CartLV.ItemsSource = Items;
-            BottomStackpanel.DataContext = Cart;
+            Cart = user?.CurrentOrderGetOrCreate().cart1;
+            InitializeComponent();
+            CartLV.ItemsSource = Cart?.Items;
+            //BottomStackpanel.DataContext = Cart;
         }
+
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -41,6 +46,15 @@ namespace kurs
                     Manager.SaveOrShowErrorMessage();
                     break;
                 }
+        }
+
+        private void BtnProceeed_Click (object sender, RoutedEventArgs e)
+        {
+            if (SelectedAddress is null) return;
+            //New item
+            var addressModal = new AddEditAddressWindow(SelectedAddress);
+            var proceed = addressModal.ShowDialog() ?? false;
+            //Manager.MainFrame.Navigate(new OrderPage());
         }
     }
 }

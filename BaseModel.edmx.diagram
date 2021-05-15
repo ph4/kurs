@@ -18,12 +18,12 @@
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__address__user_id__76619304" />
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__order__address_i__756D6ECB" />
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__cart_item__cart___719CDDE7" />
-        <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__order__cart_id__74794A92" />
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__cart_item__produ__72910220" />
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__discount__catego__70A8B9AE" />
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__product__categor__6FB49575" />
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__user__credential__7755B73D" />
         <AssociationConnector ManuallyRouted="false" Association="dns2Model.FK__order__user_id__73852659" />
+        <AssociationConnector Association="dns2Model.FK__order__id__17C286CF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

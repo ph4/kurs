@@ -47,7 +47,8 @@ namespace kurs
                 currentProducts = currentProducts.Where(p => p.category.id == (ComboCategory.SelectedItem as category).id);
             }
 
-            currentProducts = currentProducts.Where(p => p.name.ToLower().Contains(TBoxSearch.Text.ToLower()));
+            if (!string.IsNullOrWhiteSpace(TBoxSearch.Text))
+                currentProducts = currentProducts.Where(p => p.name.ToLower().Contains(TBoxSearch.Text.ToLower()));
 
             LViewProducts.ItemsSource = currentProducts.OrderBy(p => p.name.ToLower()).ToList();
         }

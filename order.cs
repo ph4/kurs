@@ -16,13 +16,12 @@ namespace kurs
     {
         public int id { get; set; }
         public int user_id { get; set; }
-        public int cart_id { get; set; }
         public Nullable<int> address_id { get; set; }
         public string payment_type { get; set; }
         public string order_status { get; set; }
     
         public virtual address address { get; set; }
-        public virtual cart cart { get; set; }
         public virtual user user { get; set; }
+        public virtual cart cart1 { get; set; }
     }
 }

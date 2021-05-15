@@ -21,6 +21,7 @@ namespace kurs
             if (_context == null)
             {
                 _context = new Dns2Entities();
+                _context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
                 try
                 {
                     _context.SaveChanges();

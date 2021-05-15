@@ -18,7 +18,6 @@ namespace kurs
         public cart()
         {
             this.cart_items = new ObservableCollection<cart_items>();
-            this.order = new ObservableCollection<order>();
         }
     
         public int id { get; set; }
@@ -26,7 +25,6 @@ namespace kurs
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<cart_items> cart_items { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<order> order { get; set; }
+        public virtual order order1 { get; set; }
     }
 }

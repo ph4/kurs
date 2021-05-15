@@ -168,7 +168,7 @@ namespace kurs
                 {
                     Status = order.OrderStatus.Checkout,
                     user = DbUser,
-                    cart = new cart(),
+                    cart1 = new cart(),
                 };
                 DbUser.order.Add(ord);
                 Manager.SaveOrShowErrorMessage();

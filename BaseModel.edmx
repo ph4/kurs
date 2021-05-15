@@ -60,9 +60,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
-          <Property Name="cart_id" Type="int" Nullable="false" />
           <Property Name="address_id" Type="int" />
           <Property Name="payment_type" Type="nchar" MaxLength="1" />
           <Property Name="order_status" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -116,7 +115,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__cart_item__cart___719CDDE7">
-          <End Role="cart" Type="Self.cart" Multiplicity="1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="cart_items" Type="Self.cart_items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cart">
@@ -163,15 +164,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__order__cart_id__74794A92">
+        <Association Name="FK__order__id__17C286CF">
           <End Role="cart" Type="Self.cart" Multiplicity="1" />
-          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <End Role="order" Type="Self.order" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="cart">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="order">
-              <PropertyRef Name="cart_id" />
+              <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,7 +243,7 @@
             <End Role="address" EntitySet="address" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
-          <AssociationSet Name="FK__order__cart_id__74794A92" Association="Self.FK__order__cart_id__74794A92">
+          <AssociationSet Name="FK__order__id__17C286CF" Association="Self.FK__order__id__17C286CF">
             <End Role="cart" EntitySet="cart" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
@@ -283,7 +284,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="creation_time" Type="DateTime" Precision="3" />
           <NavigationProperty Name="cart_items" Relationship="Self.FK__cart_item__cart___719CDDE7" FromRole="cart" ToRole="cart_items" />
-          <NavigationProperty Name="order" Relationship="Self.FK__order__cart_id__74794A92" FromRole="cart" ToRole="order" />
+          <NavigationProperty Name="order1" Relationship="dns2Model.FK__order__id__17C286CF" FromRole="cart" ToRole="order" />
         </EntityType>
         <EntityType Name="cart_items">
           <Key>
@@ -330,13 +331,12 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="cart_id" Type="Int32" Nullable="false" />
           <Property Name="address_id" Type="Int32" />
           <Property Name="payment_type" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="order_status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="address" Relationship="Self.FK__order__address_i__756D6ECB" FromRole="order" ToRole="address" />
-          <NavigationProperty Name="cart" Relationship="Self.FK__order__cart_id__74794A92" FromRole="order" ToRole="cart" />
           <NavigationProperty Name="user" Relationship="Self.FK__order__user_id__73852659" FromRole="order" ToRole="user" />
+          <NavigationProperty Name="cart1" Relationship="dns2Model.FK__order__id__17C286CF" FromRole="order" ToRole="cart" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -411,18 +411,6 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="cart_items">
-              <PropertyRef Name="cart_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__order__cart_id__74794A92">
-          <End Role="cart" Type="Self.cart" Multiplicity="1" />
-          <End Role="order" Type="Self.order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cart">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="order">
               <PropertyRef Name="cart_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -510,10 +498,6 @@
             <End Role="cart" EntitySet="cart" />
             <End Role="cart_items" EntitySet="cart_items" />
           </AssociationSet>
-          <AssociationSet Name="FK__order__cart_id__74794A92" Association="Self.FK__order__cart_id__74794A92">
-            <End Role="cart" EntitySet="cart" />
-            <End Role="order" EntitySet="order" />
-          </AssociationSet>
           <AssociationSet Name="FK__cart_item__produ__72910220" Association="Self.FK__cart_item__produ__72910220">
             <End Role="product" EntitySet="product" />
             <End Role="cart_items" EntitySet="cart_items" />
@@ -534,7 +518,23 @@
             <End Role="user" EntitySet="user" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
+          <AssociationSet Name="FK__order__id__17C286CF" Association="dns2Model.FK__order__id__17C286CF">
+            <End Role="cart" EntitySet="cart" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__order__id__17C286CF">
+          <End Type="dns2Model.cart" Role="cart" Multiplicity="1" />
+          <End Type="dns2Model.order" Role="order" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="cart">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -603,7 +603,6 @@
               <MappingFragment StoreEntitySet="order">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="cart_id" ColumnName="cart_id" />
                 <ScalarProperty Name="address_id" ColumnName="address_id" />
                 <ScalarProperty Name="payment_type" ColumnName="payment_type" />
                 <ScalarProperty Name="order_status" ColumnName="order_status" />

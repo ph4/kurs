@@ -12,7 +12,9 @@
       FontFamily="{materialDesign:MaterialDesignFont}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CartPage">
+      Title="CartPage"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}"
+      >
 
     <Grid>
         <StackPanel Orientation="Vertical">
@@ -24,7 +26,7 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn IsReadOnly="True" Header="Sum" Binding="{Binding SumDiscount, StringFormat={}{0:N2} ₽}">
                     </DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="False" Header="Amount" Binding="{Binding amount}">
+                    <DataGridTextColumn IsReadOnly="False" Header="Amount" Binding="{Binding Amount}">
                     </DataGridTextColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
@@ -40,10 +42,22 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel x:Name="BottomStackpanel" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="{Binding TotalOriginal, StringFormat=Total: {0:N2}₽}" Margin="20 20"></TextBlock>
-                <TextBlock Text="{Binding Total, StringFormat=Total with disount: {0:N2}₽}" Margin="20 20"></TextBlock>
-                <Button Content="Proceed to checkout" Width="200" Margin="20 20" HorizontalAlignment="Right"></Button>
+            <StackPanel x:Name="BottomStackpanel" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding Path=Cart.TotalOriginal, StringFormat=Total: {0:N2}₽}" Margin="20 20"></TextBlock>
+                    <TextBlock Text="{Binding Path=Cart.Total, StringFormat=Total with disount: {0:N2}₽}" Margin="20 20"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <ComboBox 
+                        Width="Auto"
+                        ItemsSource="{Binding Addresses}"
+                        DisplayMemberPath="address1"
+                        SelectedValue="{Binding SelectedAddress}"
+                        SelectedIndex="0"
+                        >
+                    </ComboBox>
+                    <Button Content="Proceed to checkout" Width="200" Margin="20 20" HorizontalAlignment="Right" Click="BtnProceeed_Click"></Button>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEditAddressWindow.xaml.cs">
+      <DependentUpon>AddEditAddressWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="address.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -113,14 +116,15 @@
     </Compile>
     <Compile Include="ModelPartial\CartItemPartial.cs" />
     <Compile Include="ModelPartial\CartPartial.cs" />
+    <Compile Include="ModelPartial\ProductParital.cs" />
     <Compile Include="order.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderExtensions.cs" />
+    <Compile Include="ModelPartial\ProductJsonExtentions.cs" />
     <Compile Include="product.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelPartial\ProductJsonExtentions.cs" />
     <Compile Include="ProductPage\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -144,6 +148,10 @@
     </Compile>
     <Compile Include="Validation\Validations.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
+    <Page Include="AddEditAddressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -121,7 +121,7 @@ CREATE TABLE [cart_items] (
 GO
 
 CREATE TABLE [order] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
+  [id] int PRIMARY KEY
   [user_id] int NOT NULL,
   [cart_id] int NOT NULL,
   [address_id] int NOT NULL,
@@ -169,7 +169,7 @@ GO
 ALTER TABLE [discount] ADD FOREIGN KEY ([category_id]) REFERENCES [category] ([id])
 GO
 
-ALTER TABLE [cart_items] ADD FOREIGN KEY ([cart_id]) REFERENCES [cart] ([id])
+ALTER TABLE [cart_items] ADD FOREIGN KEY ([cart_id]) REFERENCES [cart] ([id]) ON DELETE CASCADE
 GO
 
 ALTER TABLE [cart_items] ADD FOREIGN KEY ([product_id]) REFERENCES [product] ([id])
@@ -178,7 +178,7 @@ GO
 ALTER TABLE [order] ADD FOREIGN KEY ([user_id]) REFERENCES [user] ([id])
 GO
 
-ALTER TABLE [order] ADD FOREIGN KEY ([cart_id]) REFERENCES [cart] ([id])
+ALTER TABLE [order] ADD FOREIGN KEY ([id]) REFERENCES [cart] ([id])
 GO
 
 ALTER TABLE [order] ADD FOREIGN KEY ([address_id]) REFERENCES [address] ([id])
