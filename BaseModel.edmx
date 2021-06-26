@@ -76,7 +76,7 @@
           <Property Name="description" Type="nvarchar" MaxLength="2000" />
           <Property Name="price" Type="money" />
           <Property Name="specifications_json" Type="nvarchar" MaxLength="1000" />
-          <Property Name="image" Type="varbinary" MaxLength="3000" />
+          <Property Name="image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -348,7 +348,7 @@
           <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="specifications_json" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="image" Type="Binary" MaxLength="3000" FixedLength="false" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="cart_items" Relationship="Self.FK__cart_item__produ__72910220" FromRole="product" ToRole="cart_items" />
           <NavigationProperty Name="category" Relationship="Self.FK__product__categor__6FB49575" FromRole="product" ToRole="category" />
         </EntityType>

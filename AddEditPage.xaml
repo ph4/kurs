@@ -11,7 +11,7 @@
       TextElement.FontSize="14"
       FontFamily="{materialDesign:MaterialDesignFont}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="800"
       Title="AddEditPage">
 
     <Grid>
@@ -33,7 +33,7 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
@@ -41,7 +41,30 @@
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Cat" Grid.Row="0"></TextBlock>
-        <ComboBox materialDesign:HintAssist.Hint="Select category" SelectedItem="{Binding category}" x:Name="comboCategory" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="Auto" DisplayMemberPath="name"/>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ComboBox materialDesign:HintAssist.Hint="Select category" SelectedItem="{Binding category}" 
+                      x:Name="comboCategory" Grid.Column="0" 
+                      HorizontalAlignment="Left"  Width="Auto" DisplayMemberPath="name"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Separator Width="2" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                <Label Content="Image"></Label>
+                <Image x:Name="ProductImage" Width="130" Margin="10 10 10 10"
+                       Stretch="UniformToFill"  HorizontalAlignment="Left" >
+                    <Image.Source>
+                        <Binding Path ="image">
+                            <Binding.TargetNullValue>
+                                <ImageSource>/Resources/no_image.png</ImageSource>
+                            </Binding.TargetNullValue>
+                        </Binding>
+                    </Image.Source>
+                </Image>
+                <Button x:Name="BtnUploadImg" Content="Open file" Click="BtnUploadImg_Click"></Button>
+            </StackPanel>
+        </Grid>
 
         <TextBlock Text="Name" Grid.Row="1"/>
         <TextBox materialDesign:HintAssist.Hint="Name" Text="{Binding name}" Grid.Row="1" Grid.Column="1"></TextBox>
@@ -57,8 +80,6 @@
                  materialDesign:HintAssist.Hint="Description" 
                  ></TextBox>
 
-        <Separator Style="{DynamicResource MaterialDesignDarkSeparator}"/>
-        <Separator/>
         <TextBlock Grid.Row="4" Text="Json"></TextBlock>
         <TextBox Grid.Row="4" Grid.Column="1" 
                  Text="{Binding specifications_json}"

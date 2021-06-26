@@ -89,7 +89,7 @@ CREATE TABLE [product] (
   [description] nvarchar(2000),
   [price] money,
   [specifications_json] nvarchar(1000),
-  [image] varbinary
+  [image] varbinary(max)
 )
 GO
 

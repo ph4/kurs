@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +25,7 @@ namespace kurs
         private product _currentProduct;
         public AddEditPage(product selectedProduct)
         {
-            if (selectedProduct == null)
-                _currentProduct = new product();
-            else
-                _currentProduct = selectedProduct;
+            _currentProduct = selectedProduct ?? new product();
 
             InitializeComponent();
             // _currentProduct = Dns2Entities.GetContext().
@@ -59,6 +58,23 @@ namespace kurs
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error saving changes");
+            }
+        }
+
+        private void BtnUploadImg_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog
+            {
+                Filter = "Image files (*.png, *.jpg, *.jpeg)|*.png;*.jpg;*.jpeg|All Files (*.*)|*.*",
+                RestoreDirectory = true
+            };
+
+            if (dlg.ShowDialog() ?? false)
+            {
+                _currentProduct.image = File.ReadAllBytes(dlg.FileName);
+
+                //TODO
+                BindingOperations.GetBindingExpression(ProductImage, Image.SourceProperty).UpdateTarget();
             }
         }
     }
