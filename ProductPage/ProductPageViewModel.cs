@@ -36,7 +36,7 @@ namespace kurs.ProductStuff
         public string Name =>  Product?.name;
         public decimal? Price => Product?.Price;
         public decimal? PriceDiscount => Product?.PriceDiscount;
-        public string Json =>  Product?.specifications_json;
+        public string Json => Product?.specifications_json;
         public byte[] Image => Product?.image;
         public string Description => Product?.description;
         public ICollection<ISpecification> Specifications => Product?.Specifications;

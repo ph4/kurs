@@ -26,11 +26,17 @@ namespace kurs
         public address SelectedAddress { get; set; }
 
         //Enumerable.Append availale in .net versions 4.7.1 and above
-        public IEnumerable<address> Addresses => Cart?.order1.user.address.Concat(new List<address>(1) { new address { address1 = "*New Address*" } });
+        public IEnumerable<address> Addresses => (Cart?.order1.user.address ?? new ObservableCollection<address>())
+            .Concat(new List<address>(1) { new address { address1 = "*New Address*" } });
         public CartPage()
         {
             var user = Manager.CurrentUser;
-            Cart = user?.CurrentOrderGetOrCreate().cart1;
+            if (user is null)
+            {
+                _ = MessageBox.Show("You need to login in order to access cart");
+                return;
+            }
+            Cart = user.CurrentOrderGetOrCreate().cart1;
             InitializeComponent();
             CartLV.ItemsSource = Cart?.Items;
             //BottomStackpanel.DataContext = Cart;
@@ -54,7 +60,10 @@ namespace kurs
             //New item
             var addressModal = new AddEditAddressWindow(SelectedAddress);
             var proceed = addressModal.ShowDialog() ?? false;
-            //Manager.MainFrame.Navigate(new OrderPage());
+            if (proceed)
+            {
+                Manager.MainFrame.Navigate(new ReceitPage());
+            }
         }
     }
 }

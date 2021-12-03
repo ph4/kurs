@@ -14,7 +14,7 @@
         Title="AddEditAddressWindow" Height="450" Width="500"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         >
-    <Grid Margin="20" DataContext="{Binding Address}">
+    <Grid Margin="20" DataContext="{Binding Adress}">
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignTextBlock}">
                 <Setter Property="VerticalAlignment" Value="Center"/>

@@ -22,9 +22,11 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name}">
                     </DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding PriceDiscount, StringFormat={}{0:N2} ₽}">
+                    <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding PriceOriginal, StringFormat={}{0:N2} ₽}">
                     </DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="True" Header="Sum" Binding="{Binding SumDiscount, StringFormat={}{0:N2} ₽}">
+                    <DataGridTextColumn IsReadOnly="True" Header="Price w/ discound" Binding="{Binding PriceDiscount, StringFormat={}{0:N2} ₽}">
+                    </DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Header="Total" Binding="{Binding SumDiscount, StringFormat={}{0:N2} ₽}">
                     </DataGridTextColumn>
                     <DataGridTextColumn IsReadOnly="False" Header="Amount" Binding="{Binding Amount}">
                     </DataGridTextColumn>
