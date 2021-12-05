@@ -33,7 +33,7 @@ namespace kurs.ProductStuff
         {
             Product = p;
         }
-        public string Name =>  Product?.name;
+        public string Name => Product?.name;
         public decimal? Price => Product?.Price;
         public decimal? PriceDiscount => Product?.PriceDiscount;
         public string Json => Product?.specifications_json;

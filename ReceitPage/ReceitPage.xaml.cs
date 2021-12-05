@@ -30,6 +30,7 @@ namespace kurs
     /// </summary>
     public partial class ReceitPage : Page, INotifyPropertyChanged
     {
+        private Document document;
         private Document GetDocument()
         {
             var doc = new Document();
@@ -52,9 +53,9 @@ namespace kurs
             var order = Manager.CurrentUser.CurrentOrderGetOrCreate();
             var rd = new ReceitDocument();
 
-            var doc = rd.CreateDocument(user.Fio, order.address.address1, order.cart1.cart_items);
+            document = rd.CreateDocument(user.Fio, order.address.address1, order.cart1.cart_items);
 
-            string ddl = DdlWriter.WriteToString(doc);
+            string ddl = DdlWriter.WriteToString(document);
             DocumentView.Ddl = ddl;
             DocumentView.viewer.FitToHeight();
         }
@@ -69,13 +70,14 @@ namespace kurs
             // is a collection of small programs and each program renders the glyph of a character when executed.
             // Using a font in PDFsharp may lead to the embedding of one or more font programms, because each outline
             // (regular, bold, italic, bold+italic, ...) has its own fontprogram)
-            const PdfFontEmbedding embedding = PdfFontEmbedding.Always;
+            //const PdfFontEmbedding embedding = PdfFontEmbedding.Always;
 
             // Create a renderer for the MigraDoc document.
-            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false)
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode: true)
             {
                 // Associate the MigraDoc document with a renderer
-                Document = GetDocument(),
+                Document = document
+
             };
 
 
@@ -84,7 +86,7 @@ namespace kurs
 
 
             // Save the document...
-            const string filename = "HelloWorld.pdf";
+            const string filename = "receit.pdf";
             pdfRenderer.PdfDocument.Save(filename);
             // ...and start a viewer.
             Process.Start(filename);
